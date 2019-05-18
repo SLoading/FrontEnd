@@ -1,6 +1,6 @@
 import React, { Component,View } from 'react';
-import './main.css';
-import './table.css';
+import '../style/main.css';
+import '../style/table.css';
 var n = -1;
 var t = -1;
 class RASP2 extends Component{

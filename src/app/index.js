@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './style/main.css';
 import RASP2 from './app/RASP2';
-import * as serviceWorker from './app/serviceWorker';
+import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(<RASP2 />, document.getElementById('root'));
 
