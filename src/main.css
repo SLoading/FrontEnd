@@ -1,0 +1,155 @@
+body {
+  background-color: #fff;
+  font-family: sans-serif;
+  margin: 0px; }
+
+.nav {
+  display: flex;
+  flex-direction: column; }
+  .nav .Up {
+    display: flex;
+    flex-direction: row; }
+  .nav .logo_nav {
+    width: 15%; }
+  .nav .logo_nav img {
+    margin-left: 40%; }
+  .nav .nav_menu {
+    background-color: #006cb5;
+    border-radius: 15px;
+    padding: 15px;
+    display: flex;
+    width: 70%;
+    justify-content: space-around; }
+  .nav a {
+    color: #fff;
+    text-decoration: none; }
+
+.App {
+  background-color: #fff;
+  border: 5px solid #00538A;
+  border-radius: 10px;
+  padding: 2vh 15vh;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%); }
+
+.App-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: #000; }
+
+.image_logo {
+  margin: 2vh;
+  width: 80px;
+  height: 80px; }
+
+.btnAut {
+  background-color: #69a51b;
+  border: none;
+  color: #fff;
+  padding: 0.5em 2em;
+  margin: 25px 40%;
+  border-radius: 10px;
+  text-decoration: none;
+  outline: none; }
+
+.btnAut:hover {
+  background-color: #689344; }
+
+.logName input {
+  margin-left: 49px; }
+
+.dKnow_pass {
+  color: #689344;
+  outline: none;
+  text-decoration: none;
+  font-size: 14px; }
+
+.dKnow_pass:hover {
+  color: #517235;
+  outline: none;
+  text-decoration: none;
+  font-size: 14px; }
+
+input {
+  margin: 7px;
+  outline: none;
+  background-color: #b9b9b9;
+  border-radius: 10px;
+  margin-left: 10px; }
+
+.container {
+  margin-top: 0px;
+  text-align: center; }
+
+.tabl {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, 0%); }
+  .tabl th {
+    background-color: #005cd5;
+    padding: 0.5em;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    color: #fff; }
+  .tabl td {
+    padding: 0.5em 12vh; }
+  .tabl table {
+    border-collapse: collapse; }
+
+.week {
+  width: 87%;
+  margin: 0px 8vh; }
+  .week a {
+    outline: none;
+    text-decoration: none; }
+
+.arrow_week {
+  width: 100%;
+  display: flex;
+  justify-content: space-around; }
+
+/*List*/
+.chek {
+  border-radius: 20px;
+  left: 50%;
+  transform: translate(0%, 30%); }
+  .chek .search_Form {
+    background-color: #fff;
+    padding: 5px; }
+  .chek .search_Submit {
+    background-color: #006cb5;
+    color: #fff;
+    padding: 5px 1em;
+    text-decoration: none;
+    outline: none; }
+  .chek .search_Submit:hover {
+    background-color: #035389;
+    color: #fff;
+    padding: 5px 1em;
+    text-decoration: none;
+    outline: none; }
+
+.CheckBoxs {
+  left: 50%;
+  transform: translate(0%, 30%);
+  width: 100%;
+  margin: 2em;
+  justify-content: center;
+  display: flex;
+  flex-direction: row; }
+
+.top {
+  display: flex;
+  flex-direction: column; }
+
+/*# sourceMappingURL=main.css.map */

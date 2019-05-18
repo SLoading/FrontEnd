@@ -1,0 +1,35 @@
+.tablic {
+  display: flex;
+  flex-direction: column; }
+  .tablic .head_table {
+    background-color: #006cb5;
+    color: #fff;
+    padding: 0px 15em; }
+    .tablic .head_table h4 {
+      margin: 12px; }
+  .tablic .body_table {
+    margin: 0px;
+    display: flex;
+    flex-direction: row;
+    width: 100%; }
+    .tablic .body_table h5 {
+      margin-bottom: 0px;
+      padding-bottom: 7px;
+      border-bottom: 2px solid #000; }
+    .tablic .body_table .left_col {
+      width: 30%; }
+    .tablic .body_table .time {
+      border: 1px solid #8e8e8e;
+      border-left: 0px;
+      border-top: 0px;
+      padding: 1em; }
+    .tablic .body_table .right_col {
+      width: 70%; }
+    .tablic .body_table .discip {
+      border: 1px solid #8e8e8e;
+      border-top: 0px;
+      border-right: 0px;
+      border-left: 0px;
+      padding: 1em; }
+
+/*# sourceMappingURL=table.css.map */
