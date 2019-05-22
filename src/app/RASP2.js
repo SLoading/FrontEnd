@@ -1,6 +1,7 @@
-import React, { Component,View } from 'react';
-import '../style/main.css';
-import '../style/table.css';
+import React, { Component,View } from 'react'
+import '../style/main.css'
+import '../style/table.css'
+import '../style/search.css'
 var n = -1;
 var t = -1;
 class RASP2 extends Component{
@@ -19,7 +20,7 @@ class RASP2 extends Component{
       ['11:30-13:00','13:30-15:00'],
       ['13:30-15:00'],
       [],
-      ['15:10-16:40','16:50-18:20']];
+      ['15:10-16:40','16:50-18:20']]
       return time[t]
   }
   Disc_day(){
@@ -30,12 +31,18 @@ class RASP2 extends Component{
       ['log','bd'],
       ['web'],
       [],
-      ['oop','oop']];
+      ['oop','oop']]
       return disp[n]
       }
 
   render() {
-    const day = ['Понедельник', 'Вторник', 'Среда', 'Четрвег', 'Пятница', 'Суббота'];
+    const day = [
+      ['Понедельник'],
+      ['Вторник'],
+      ['Среда'],
+      ['Четрвег'],
+      ['Пятница'],
+      ['Суббота']];
     var today = new Date(),
       date = today.getDate() + '.' + (today.getMonth() + 1) + '.' + today.getFullYear() + " \n" + today.getDay();
       this.state = {
@@ -55,6 +62,12 @@ class RASP2 extends Component{
                 <a href="#">Запросы</a>
             </div>
           </div>
+        </div>
+        <div className="Search">
+          <form onSubmit={this.handleSubmit} method="post" action="/search">
+          <input className="search_Form" type="text" placeholder="Поиск..." size="70"  />
+          <input className="search_Submit"  type="submit" value='Поиск ' />
+          </form>
         </div>
           <h1 id="date">{this.state.date}</h1>
           <div className="tabl">
