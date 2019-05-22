@@ -65,11 +65,11 @@ class RASP2 extends Component{
         </div>
         <div className="Search">
           <form onSubmit={this.handleSubmit} method="post" action="/search">
-          <input className="search_Form" type="text" placeholder="Поиск..." size="70"  />
+          <input className="search_Form" type="text" placeholder="Поиск..."  />
           <input className="search_Submit"  type="submit" value='Поиск ' />
           </form>
         </div>
-          <h1 id="date">{this.state.date}</h1>
+          <h2 id="date">{this.state.date}</h2>
           <div className="tabl">
             <div className="week">
               <div className="arrow_week">
