@@ -1,3 +1,25 @@
+.tabl{
+  .Timetable{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content:space-around;
+    a{
+      outline: none;
+      text-decoration: none;
+    }
+    .TimetableClasses{
+      background-color: #006cb5;
+      padding: 10px 20px;
+      color:#fff;
+    }
+    .TimetableSession{
+      background-color: #fff;
+      padding: 10px 20px;
+      color:#006cb5;
+    }
+  }
+}
 .tablic{
   display: flex;
   flex-direction: column;

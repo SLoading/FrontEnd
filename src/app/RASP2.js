@@ -42,7 +42,8 @@ class RASP2 extends Component{
       ['Среда'],
       ['Четрвег'],
       ['Пятница'],
-      ['Суббота']];
+      ['Суббота']
+    ];
     var today = new Date(),
       date = today.getDate() + '.' + (today.getMonth() + 1) + '.' + today.getFullYear() + " \n" + today.getDay();
       this.state = {
@@ -71,6 +72,10 @@ class RASP2 extends Component{
         </div>
           <h2 id="date">{this.state.date}</h2>
           <div className="tabl">
+            <div className="Timetable">
+              <a href="#"><div className="TimetableClasses">Расписание занятий</div></a>
+              <a href="#"><div className="TimetableSession">Расписание сессии</div></a>
+            </div>
             <div className="week">
               <div className="arrow_week">
                 <a href='#' onClick={(e) => this.weekClick(e)}>&lt;</a>

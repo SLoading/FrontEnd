@@ -116,7 +116,9 @@ input {
 .arrow_week {
   width: 100%;
   display: flex;
-  justify-content: space-around; }
+  justify-content: space-between; }
+  .arrow_week #weekN {
+    text-decoration: underline solid #006cb5; }
 
 /*List*/
 .CheckBoxs {
