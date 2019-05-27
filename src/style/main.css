@@ -87,31 +87,30 @@ input {
   margin-top: 0px;
   text-align: center; }
 
+.HGroup {
+  position: relative; }
+
 .tabl {
   display: flex;
   flex-direction: column;
   position: absolute;
-  top: 30%;
+  top: 35%;
   left: 50%;
   margin-right: -50%;
   transform: translate(-50%, 0%); }
-  .tabl th {
-    background-color: #005cd5;
-    padding: 0.5em;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    color: #fff; }
-  .tabl td {
-    padding: 0.5em 12vh; }
-  .tabl table {
-    border-collapse: collapse; }
 
-.week {
-  width: 87%;
-  margin: 0px 8vh; }
-  .week a {
-    outline: none;
-    text-decoration: none; }
+.week button {
+  outline: none;
+  background-color: #006cb5;
+  border: 1px solid #8e8e8e;
+  color: #fff;
+  text-decoration: none; }
+.week button:hover {
+  outline: none;
+  background-color: #fff;
+  border: 1px solid #fff;
+  color: #006cb5;
+  text-decoration: none; }
 
 .arrow_week {
   width: 100%;

@@ -3,7 +3,7 @@
     width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content:space-around;
+    justify-content:space-between;
     a{
       outline: none;
       text-decoration: none;
@@ -17,6 +17,19 @@
       background-color: #fff;
       padding: 10px 20px;
       color:#006cb5;
+    }
+    .TimetableSession:hover{
+      background-color: #006cb5;
+      color:#fff;
+    }
+    .TimetableClasses:active{
+      background-color: #fff;
+      padding: 10px 20px;
+      color:#006cb5;
+    }
+    .TimetableSession:active{
+      background-color: #006cb5;
+      color:#fff;
     }
   }
 }
@@ -49,17 +62,21 @@
       border: 1px solid #8e8e8e;
       border-left: 0px;
       border-top: 0px;
-      padding: 1em;
+      padding: 2.5em;
     }
     .right_col{
+      text-align: left;
       width:70%;
+      h5{
+        padding-left:10px
+      }
     }
     .discip{
       border: 1px solid #8e8e8e;
       border-top: 0px;
       border-right: 0px;
       border-left: 0px;
-      padding: 1em;
+      padding: 1.38em;
     }
   }
 }

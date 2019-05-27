@@ -96,33 +96,30 @@ input{
   margin-top: 0px;
   text-align: center;
 }
+.HGroup{
+  position:relative;
+}
 .tabl{
   display: flex;
   flex-direction: column;
   position:absolute;
-  top: 30%;
+  top: 35%;
   left: 50%;
   margin-right: -50%;
-  transform: translate(-50%, 0%);
-  th{
-    background-color: #005cd5;
-    padding: 0.5em;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    color: #fff;
-  }
-  td{
-    padding: 0.5em 12vh;
-  }
-  table{
-    border-collapse: collapse;
-  }
-}
+  transform: translate(-50%, 0%);}
 .week{
-    width: 87%;
-    margin: 0px 8vh;
-    a{
+    button{
       outline: none;
+      background-color: #006cb5;
+      border: 1px solid #8e8e8e;
+      color:#fff;
+      text-decoration: none;
+    }
+    button:hover{
+      outline: none;
+      background-color: #fff;
+      border: 1px solid #fff;
+      color:#006cb5;
       text-decoration: none;
     }
 
