@@ -16,10 +16,17 @@ body {
   .nav .nav_menu {
     background-color: #006cb5;
     border-radius: 15px;
-    padding: 15px;
+    padding: 5px;
     display: flex;
     width: 70%;
     justify-content: space-around; }
+  .nav ul {
+    width: 100%;
+    justify-content: space-around;
+    display: flex;
+    flex-direction: row; }
+  .nav li {
+    list-style-type: none; }
   .nav a {
     color: #fff;
     text-decoration: none; }

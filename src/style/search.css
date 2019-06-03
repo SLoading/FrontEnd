@@ -1,6 +1,6 @@
 .Search {
   margin-top: 20px; }
-  .Search .search_Form {
+  .Search #search_Form {
     width: 30vw;
     background-color: #fff;
     border-radius: 20px;
