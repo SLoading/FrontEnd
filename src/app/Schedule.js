@@ -6,15 +6,24 @@ import '../style/table.css'
 import '../style/search.css'
 import SearchGroup from './SearchGroup'
 import axios  from 'axios';
+import Store from './Store';
 let n = -1;
 let t = -1;
-let InputSearch = "";
+let InputSearch = {  };
+function updateStat(state){
+  return { InputSearch: state.InputSearch }
+  }
+const store = new Store(updateStat,InputSearch)
 
 class Schedule extends Component{
   constructor(props) {
       super(props);
       this.Search= this.Search.bind(this);
   }
+componentDidMount() {
+  store.subscribe(() => this.forceUpdate());
+}
+
   // weekClick(){
   //   if (document.getElementById('weekN').textContent == "1 неделя")
   //     document.getElementById('weekN').innerHTML = '2 неделя'
@@ -30,13 +39,16 @@ class Schedule extends Component{
 
   onSearchChange(event){
     InputSearch = document.getElementById("search_Form").value
+    console.log(InputSearch)
   }
   Search(e){
     e.preventDefault()
     const group = InputSearch
     axios.get(`http://127.0.0.1:3030/api/getTimetable`,{ params: {groupName:group} })
       .then(res => {
-        this.props.history.push('/group')
+        store.update(InputSearch)
+        console.log("value =  " + store.value)
+        this.props.history.push('/Timetable/group')
       })
       .catch(err=>{
         console.log(err);
@@ -129,7 +141,7 @@ Timetable = () =>(
         <Link onClick={this.Search}><input className="search_Submit"  type="submit" value='Поиск '/></Link>
       </form>
     </div>
-    <Route exact path="/group" component={this.TitleH}/>
+    <Route exact path="/Timetable/group" component={this.TitleH}/>
   </Router>
 )
 Manager = () =>(
@@ -165,7 +177,7 @@ Request = () =>(
             </div>
           </div>
           <Route exact  path="/Timetable" component={this.Timetable}/>
-          <Route exact path="/group" component={this.Search}/>
+          <Route exact path="/Timetable/group" component={this.Search}/>
           <Route exact path="/Calendar" component={this.Calendar}/>
           <Route exact path="/Manager" component={this.Manager}/>
           <Route exact path="/Request" component={this.Request}/>

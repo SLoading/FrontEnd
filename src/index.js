@@ -13,7 +13,7 @@ ReactDOM.render(
   <Router history={history} >
     <Route exact path="/" component={RegForm} />
     <Route exact path="/Timetable" component={Timetable} />
-    <Route exact path="/group" component={SearchGroup} />
+    <Route exact path="/Timetable/group" component={SearchGroup} />
   </Router>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
