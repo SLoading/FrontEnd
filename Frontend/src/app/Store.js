@@ -9,11 +9,9 @@ export default class Store {
     return this._state;
   }
 
-  update(action) {
-
-    this._state = action;
+  update(myState) {
+    this._state = this._updateState(this._state,myState);
     this._callbacks.forEach(callback => callback());
-    console.log(this._state)
   }
 
   subscribe(callback) {

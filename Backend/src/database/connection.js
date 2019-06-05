@@ -3,7 +3,7 @@ const connection = mysql.createConnection({
     host: "localhost",
     user: "root",
     database: "sibgu",
-    password: "12345",
+    password: "2171013",
     charset: "utf8"
 })
 

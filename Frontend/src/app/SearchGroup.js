@@ -8,15 +8,14 @@ import '../style/search.css'
 import axios  from 'axios';
 import Store from './Store'
 const history = createBrowserHistory();
-const groupName = ""
-const store = new  Store()
-const G = store.value
+const groupName = "";
+const store = new  Store();
 
 class SearchGroup extends Component{
 
   constructor(props){
    super(props);
-   this.goBack = this.goBack.bind(this); // i think you are missing this
+   this.goBack = this.goBack.bind(this); 
 }
 
 goBack(){
@@ -54,7 +53,7 @@ weekClick(){
   Tab = () => (
     <div className="Top">
       <div className="HGroup">
-        <h2>{G}</h2>
+        <h2></h2>
         <h2>2 семестр 2018-2019г.</h2>
         <h3 id="date">{this.state.date} - 1 неделя</h3>
       </div>
@@ -74,7 +73,6 @@ weekClick(){
     </div>
   )
   render() {
-    console.log("G = " + G)
     console.log(Timetable.getInpSearch)
     let today = new Date(),
       date = today.getDate() + '.' + (today.getMonth() + 1) + '.' + today.getFullYear();
@@ -91,7 +89,8 @@ weekClick(){
       //   .catch(err=>{
       //     console.log(err);
       //   })
-    return(
+      console.log(store);
+      return(
   <Router>
     <div className="container">
       <div className="nav">

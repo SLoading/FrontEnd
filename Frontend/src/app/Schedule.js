@@ -9,11 +9,13 @@ import axios  from 'axios';
 import Store from './Store';
 let n = -1;
 let t = -1;
-let InputSearch = {  };
-function updateStat(state){
-  return { InputSearch: state.InputSearch }
-  }
-const store = new Store(updateStat,InputSearch)
+let InputSearch = { count : "" };
+function updateState(state){
+  return  { count : state.count };
+}
+const store = new Store(updateState,InputSearch);
+
+
 
 class Schedule extends Component{
   constructor(props) {
@@ -38,21 +40,19 @@ componentDidMount() {
   }
 
   onSearchChange(event){
-    InputSearch = document.getElementById("search_Form").value
-    console.log(InputSearch)
+    InputSearch.count = document.getElementById("search_Form").value;
+    store.update(InputSearch);
   }
   Search(e){
     e.preventDefault()
-    const group = InputSearch
+    let group = store.value.count;
     axios.get(`http://127.0.0.1:3030/api/getTimetable`,{ params: {groupName:group} })
       .then(res => {
-        store.update(InputSearch)
-        console.log("value =  " + store.value)
         this.props.history.push('/Timetable/group')
       })
       .catch(err=>{
         console.log(err);
-      })
+      });
   }
 
 
