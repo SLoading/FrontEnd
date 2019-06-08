@@ -1,23 +1,10 @@
-export default class Store {
-  constructor(updateState, state) {
-    this._updateState = updateState;
-    this._state = state;
-    this._callbacks = [];
-  }
+import { combineReducers } from 'redux';
+import UserRed from '../reducer/reducer';
 
-  get value() {
-    return this._state;
-  }
 
-  update(action) {
 
-    this._state = action;
-    this._callbacks.forEach(callback => callback());
-    console.log(this._state)
-  }
+const allReducers = combineReducers({
+  users: UserRed
+})
 
-  subscribe(callback) {
-    this._callbacks.push(callback);
-    return () => this._callbacks = this._callbacks.filter(cb => cb !== callback);
-  }
-}
+export default allReducers;

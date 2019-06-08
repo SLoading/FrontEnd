@@ -7,16 +7,16 @@ import '../style/table.css'
 import '../style/search.css'
 import axios  from 'axios';
 import Store from './Store'
+import { connect } from 'react-redux';
 const history = createBrowserHistory();
 const groupName = ""
-const store = new  Store()
-const G = store.value
 
 class SearchGroup extends Component{
 
+
   constructor(props){
    super(props);
-   this.goBack = this.goBack.bind(this); // i think you are missing this
+   this.goBack = this.goBack.bind(this);
 }
 
 goBack(){
@@ -30,8 +30,41 @@ weekClick(){
   else
     document.getElementById('weekN').innerHTML = '1 неделя'
   return(document.getElementById('weekN').textContent)
-
 }
+
+  GroupSchedule(){
+    let time = []
+     let dis = []
+ //    let day = this.fweek.map((user) => {
+ //     return <div>{user}</div>;
+ // });
+return (
+  <div className="items">
+    <div className="head_table">
+      <h4 id="Name_day">12</h4>
+    </div>
+    <div className="body_table">
+      <div className="left_col">
+        <h5>Время</h5>
+        <div className="time">
+          <div>12</div>
+        </div>
+      </div>
+      <div className="right_col">
+        <h5>Дисциплина</h5>
+          <div>12</div>
+          <div className="Teacher">Черкасова</div>
+          <div className="Rooms">корп ГЛ 412</div>
+      </div>
+    </div>
+  </div>
+)
+}
+  NumberWeek(){
+    let date = new Date()
+    let week1 = new Date(date.getFullYear(), 0 , 4)
+    return (1 + Math.round(((date.getTime() - week1.getTime()) / 86400000 -3 +(week1.getDay() + 6) % 7 ) / 7)) % 10
+  }
   Manager = () =>(
    <div>
      <h2>В разработке</h2>
@@ -52,45 +85,41 @@ weekClick(){
   )
 
   Tab = () => (
-    <div className="Top">
-      <div className="HGroup">
-        <h2>{G}</h2>
-        <h2>2 семестр 2018-2019г.</h2>
-        <h3 id="date">{this.state.date} - 1 неделя</h3>
-      </div>
-      <div className="tabl">
-        <div className="Timetable">
-          <a className="TimetableClasses" href="#">Расписание занятий</a>
-          <a className="TimetableSession" href="#">Расписание сессии</a>
+    <div>
+      <div className="Top">
+        <div className="HGroup">
+          <h2></h2>
+          <h2>2 семестр 2018-2019г.</h2>
+          <h3 id="date">{this.state.date} - {this.NumberWeek()-1} неделя</h3>
         </div>
-        <div className="week">
-          <div className="arrow_week">
-            <button onClick={(e) => this.weekClick(e)}>&lt;</button>
-            <p id="weekN">1 неделя</p>
-            <button href='#' onClick={(e) => this.weekClick(e)}>&gt;</button>
+        <div className="tabl">
+          <div className="Timetable">
+            <a className="TimetableClasses" href="#">Расписание занятий</a>
+            <a className="TimetableSession" href="#">Расписание сессии</a>
+          </div>
+          <div className="week">
+            <div className="arrow_week">
+              <button onClick={(e) => this.weekClick(e)}>&lt;</button>
+              <p id="weekN">1 неделя</p>
+              <button href='#' onClick={(e) => this.weekClick(e)}>&gt;</button>
+            </div>
+          </div>
+          <div className="tablic">
+                {this.GroupSchedule()}
           </div>
         </div>
       </div>
     </div>
   )
+
   render() {
-    console.log("G = " + G)
-    console.log(Timetable.getInpSearch)
+
     let today = new Date(),
       date = today.getDate() + '.' + (today.getMonth() + 1) + '.' + today.getFullYear();
       this.state = {
         date: date
       };
-      // console.log("ad " + groupName)
-      // axios.get(`http://127.0.0.1:3030/api/getTimetable`,{ params: {groupName:group} })
-      //   .then(res => {
-      //     groupName = res.data.group
-      //     group = groupName
-      //     console.log(groupName)
-      //   })
-      //   .catch(err=>{
-      //     console.log(err);
-      //   })
+      console.log(this.props.users)
     return(
   <Router>
     <div className="container">
@@ -109,14 +138,24 @@ weekClick(){
           </div>
         </div>
       </div>
-      <Route exact path="/Timetable/group" component={this.Tab}/>
+      {/*<Route exact path="/Timetable/group" component={this.Tab}/>*/}
       <Route exact path="/Timetable" component={Timetable}/>
       <Route exact path="/Calendar" component={this.Calendar}/>
       <Route exact path="/Manager" component={this.Manager}/>
       <Route exact path="/Request" component={this.Request}/>
+              {this.Tab()}
     </div>
   </Router>
     );
   }
 }
-export default SearchGroup;
+const mapDispatchToProps = dispatch => ({
+
+})
+function mapStateToProps(state){
+  return{
+    users: state.users
+
+  };
+}
+export default connect(mapStateToProps, mapDispatchToProps)(SearchGroup);
