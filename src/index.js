@@ -1,10 +1,12 @@
 import React from 'react';
+
 import ReactDOM from 'react-dom';
 import {BrowserRouter as Router, Route} from 'react-router-dom'
 import createBrowserHistory from 'history/createBrowserHistory';
 import './style/main.css';
 import RegForm from './app/RegForm';
 import Timetable from './app/Schedule';
+
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import allReducers from './reducer/rootReducer';
