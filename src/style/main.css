@@ -96,6 +96,13 @@ input {
 
 .HGroup {
   position: relative; }
+  .HGroup .htop {
+    margin-top: 20px; }
+  .HGroup h2 {
+    margin-top: 0px;
+    margin-bottom: 0px; }
+  .HGroup h4 {
+    margin-top: 15px; }
 
 .tabl {
   display: flex;

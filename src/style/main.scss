@@ -108,6 +108,16 @@ input{
 }
 .HGroup{
   position:relative;
+  .htop{
+    margin-top: 20px;
+  }
+  h2{
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+  h4{
+    margin-top: 15px;
+  }
 }
 .tabl{
   display: flex;

@@ -42,41 +42,30 @@ weekClick(){
     document.getElementById('weekN').innerHTML = '1 неделя'
   return(document.getElementById('weekN').textContent)
 }
+//  {*/let time = []
+//   let dis = []
+//    let day = this.props.groupNumber.fweek.map((user) => {
+//     return <div>{user}</div>;
+// });*/}
+// GroupSchedule = () =>(
+//
+// )
 
-GroupSchedule = () =>{
-  let time = []
-   let dis = []
-    let day = this.fweek.map((user) => {
-     return <div>{user}</div>;
- });
-  return (
-  <div className="items">
-  <div className="head_table">
-    <h4 id="Name_day">12</h4>
-  </div>
-  <div className="body_table">
-    <div className="left_col">
-      <h5>Время</h5>
-      <div className="time">
-        <div>12</div>
-      </div>
-    </div>
-    <div className="right_col">
-      <h5>Дисциплина</h5>
-        <div>12</div>
-        <div className="Teacher">Черкасова</div>
-        <div className="Rooms">корп ГЛ 412</div>
-    </div>
-  </div>
-  </div>
-)}
-
-
+datNumber(){
+  let today = new Date(),
+    Dat = today.getDate() + '.' + (today.getMonth() + 1) + '.' + today.getFullYear();
+    this.dat = {
+      date: Dat
+    };
+    return this.dat.date
+}
 
   NumberWeek(){
-    let date = new Date()
+    var date = new Date();
+    date.setHours(0, 0, 0, 0);
+    date.setDate(date.getDate() + 3 - (date.getDay() + 6) % 7);
     let week1 = new Date(date.getFullYear(), 0 , 4)
-    return (1 + Math.round(((date.getTime() - week1.getTime()) / 86400000 -3 +(week1.getDay() + 6) % 7 ) / 7)) % 10
+    return (Math.round(((date.getTime() - week1.getTime()) / 86400000 -7 +(week1.getDay() + 6) % 7 ) / 7)) % 10
   }
   Manager = () =>(
    <div>
@@ -96,14 +85,17 @@ GroupSchedule = () =>{
      <Link to="/Timetable">Вернуться</Link>
    </div>
   )
-
+TableSchedule(props) {
+  const wek = this.props.groupNumber.group
+  console.log(wek)
+}
  Tab = this.props.groupNumber ? (
     <div>
       <div className="Top">
         <div className="HGroup">
-          <h2>{this.props.groupNumber.group}</h2>
+          <h2 className="htop">{this.props.groupNumber.group}</h2>
           <h2>2 семестр 2018-2019г.</h2>
-          {/*<h3 id="date">{this.Dat.date} - {this.NumberWeek()-1} неделя</h3>*/}
+          <h4 id="date">{this.datNumber()} - {this.NumberWeek()} неделя</h4>
         </div>
         <div className="tabl">
           <div className="Timetable">
@@ -113,11 +105,31 @@ GroupSchedule = () =>{
           <div className="week">
             <div className="arrow_week">
               <button onClick={(e) => this.weekClick(e)}>&lt;</button>
-              <p id="weekN">1 неделя</p>
+              <p id="weekN">{this.NumberWeek()} неделя</p>
               <button href='#' onClick={(e) => this.weekClick(e)}>&gt;</button>
             </div>
           </div>
           <div className="tablic">
+          {this.TableSchedule}
+          <div className="items">
+          <div className="head_table">
+            <h4 id="Name_day">123</h4>
+          </div>
+          <div className="body_table">
+            <div className="left_col">
+              <h5>Время</h5>
+              <div className="time">
+                <div>12</div>
+              </div>
+            </div>
+            <div className="right_col">
+              <h5>Дисциплина</h5>
+                <div><p>12</p></div>
+                <div className="Teacher"><p>Черкасова</p></div>
+                <div className="Rooms"><p>корп ГЛ 412</p></div>
+            </div>
+          </div>
+          </div>
           </div>
         </div>
       </div>
@@ -130,12 +142,6 @@ GroupSchedule = () =>{
   )
 
   render() {
-    let today = new Date(),
-      date = today.getDate() + '.' + (today.getMonth() + 1) + '.' + today.getFullYear();
-      this.Dat = {
-        date: date
-      };
-      console.log(this.props.groupNumber)
     return(
   <Router>
     <div className="container">
@@ -160,6 +166,7 @@ GroupSchedule = () =>{
       <Route exact path="/Manager" component={this.Manager}/>
       <Route exact path="/Request" component={this.Request}/>
       {this.Tab}
+
     </div>
   </Router>
     );
