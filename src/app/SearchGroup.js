@@ -22,12 +22,12 @@ class SearchGroup extends Component{
 goBack(){
     this.props.history.goBack();
 }
-  NumberWeek(){
+NumberWeek(){
     let date = new Date()
     let week1 = new Date(date.getFullYear(), 0 , 4)
     return (Math.round(((date.getTime() - week1.getTime()) / 86400000 -7 +(week1.getDay() + 6) % 7 ) / 7)) % 10
   }
-  dayYears(){
+dayYears(){
     let today = new Date(),
       date = today.getDate() + '.' + (today.getMonth() + 1) + '.' + today.getFullYear();
       this.state = {
@@ -44,29 +44,18 @@ weekClick(){
   return(document.getElementById('weekN').textContent)
 
 }
-  Manager = () =>(
-   <div>
-     <h2>В разработке</h2>
-     <Link to="/Timetable">Вернуться</Link>
-   </div>
-  )
-  Request = () =>(
-   <div>
-     <h2>В разработке</h2>
-     <Link to="/Timetable">Вернуться</Link>
-   </div>
-  )
-  Calendar = () =>(
-   <div>
-     <h2>В разработке</h2>
-     <Link to="/Timetable">Вернуться</Link>
-   </div>
-  )
-
+  rasp = () =>{
+    let List = this.props.groupNumber.fweek
+    console.log(List)
+    return(
+      <div>
+      </div>
+    )
+  }
   Tab = () => (
     <div className="Top">
       <div className="HGroup">
-        <h2></h2>
+        <h2 className="htop">{this.props.groupNumber.group}</h2>
         <h2>2 семестр 2018-2019г.</h2>
         <h3 id="date">{this.dayYears()} - {this.NumberWeek()} неделя</h3>
       </div>
@@ -82,45 +71,53 @@ weekClick(){
             <button href='#' onClick={(e) => this.weekClick(e)}>&gt;</button>
           </div>
         </div>
+        <div className="tablic">
+        {this.rasp}
+          <div className="items">
+            <div className="head_table">
+              <h4 id="Name_day">123</h4>
+            </div>
+            <div className="body_table">
+              <div className="left_col">
+                <h5>Время</h5>
+                <div className="time">
+                  <div>12</div>
+                </div>
+              </div>
+              <div className="right_col">
+                <h5>Дисциплина</h5>
+                  <div><p>12</p></div>
+                  <div className="Teacher"><p>Черкасова</p></div>
+                  <div className="Rooms"><p>корп ГЛ 412</p></div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   )
   render() {
-
-      // console.log("ad " + groupName)
-      // axios.get(`http://127.0.0.1:3030/api/getTimetable`,{ params: {groupName:group} })
-      //   .then(res => {
-      //     groupName = res.data.group
-      //     group = groupName
-      //     console.log(groupName)
-      //   })
-      //   .catch(err=>{
-      //     console.log(err);
-      //   })
-      console.log(store);
+      console.log(this.props.groupNumber);
       return(
   <Router>
     <div className="container">
       <div className="nav">
         <div className="Up">
           <div className="logo_nav">
-              <Link to="/Timetable"><img src="../favicon.png" /></Link>
+              <Link onClick={this.goBack}><img src="../favicon.png" /></Link>
           </div>
           <div className="nav_menu">
             <ul>
               <li><Link onClick={this.goBack}>Расписание</Link></li>
-              <li><Link to="/Calendar">Календарь</Link></li>
-              <li><Link to="/Manager">Менеджер кабинетов</Link></li>
-              <li><Link to="/Request">Запросы</Link></li>
+              <li>Календарь</li>
+              <li>Менеджер кабинетов</li>
+              <li>Запросы</li>
             </ul>
           </div>
         </div>
       </div>
       <Route exact path="/Timetable/group" component={this.Tab}/>
       <Route exact path="/Timetable" component={Timetable}/>
-      <Route exact path="/Calendar" component={this.Calendar}/>
-      <Route exact path="/Manager" component={this.Manager}/>
-      <Route exact path="/Request" component={this.Request}/>
     </div>
   </Router>
     );
