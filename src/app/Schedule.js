@@ -9,35 +9,20 @@ import SearchGroup from './SearchGroup'
 import { connect } from 'react-redux';
 import { createStore } from 'redux';
 import { add } from '../action/index'
-import getList from './getProjectList'
 import axios  from 'axios';
-import Store from './Store';
-function updateState(state){
-  return { InputSearch: state.InputSearch }
-  }
+
+import rootReducer from '../reducer/rootReducer'
   let InputSearch = ''
 
 class Schedule extends Component{
   constructor(props) {
       super(props);
-      this.Search= this.Search.bind(this);
-  }
-
-  getInpSearch(){
-    return InputSearch
   }
 
   onSearchChange(event){
     InputSearch = document.getElementById("search_Form").value
-
     console.log(InputSearch)
   }
-  Search(e){
-    e.preventDefault()
-    console.log("Privet")
-    const group = InputSearch
-    getList(group)
-    InputSearch = ""}
 
 
 Calendar = () =>(
@@ -48,16 +33,13 @@ Calendar = () =>(
 )
 
 Timetable = () =>(
-  <Router>
     <div className="Search">
       <h2>РАСПИСАНИЕ</h2>
-      <form onSubmit={this.Search}>
-        <input id="search_Form" type="text"  onChange={this.onSearchChange} placeholder="Поиск..." ref={node =>(InputSearch = node)}  />
-        <Link to={this.Search}><input className="search_Submit"  type="submit" value='Поиск '/></Link>
+      <form onSubmit={this.handleClick}>
+        <input id="search_Form" type="text"  onChange={this.onSearchChange} placeholder="Поиск..."  />
+        <input className="search_Submit"  type="submit" value='Поиск ' onClick={this.handleClick}/>
       </form>
     </div>
-    <Route exact path="/Timetable/group" component={this.TitleH}/>
-  </Router>
 )
 Manager = () =>(
  <div>
@@ -71,7 +53,10 @@ Request = () =>(
    <Link to="/Timetable">Вернуться</Link>
  </div>
 )
-
+handleClick = () =>{
+  this.props.getList(InputSearch)
+  this.props.history.push('/Timetable/group')
+}
   render() {
     return(
       <div className="container">
@@ -92,7 +77,7 @@ Request = () =>(
             </div>
           </div>
           <Route exact  path="/Timetable" component={this.Timetable}/>
-          <Route exact path="/Timetable/group" component={this.Search}/>
+          <Route exact path="/Timetable/group" component={SearchGroup}/>
           <Route exact path="/Calendar" component={this.Calendar}/>
           <Route exact path="/Manager" component={this.Manager}/>
           <Route exact path="/Request" component={this.Request}/>
@@ -101,8 +86,10 @@ Request = () =>(
     );
   }
 }
-const mapDispatchToProps = (dispatch) => ({
-  getList:(params) => dispatch(getList(params))
-})
+const mapDispatchToProps = (dispatch) => {
+  return{
+    getList: (group) => { dispatch({type: 'ADD_POST', group: InputSearch})}
+  }
+}
 
-export default connect(mapDispatchToProps)(Schedule);
+export default connect(null, mapDispatchToProps)(Schedule);

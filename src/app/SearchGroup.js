@@ -6,12 +6,23 @@ import '../style/main.css'
 import '../style/table.css'
 import '../style/search.css'
 import axios  from 'axios';
-import Store from './Store'
+import rootReducer from '../reducer/rootReducer'
 import { connect } from 'react-redux';
 const history = createBrowserHistory();
-const groupName = ""
+let groups = [ ]
+let timetable = [ ]
 
+// function getTimeTableReq(){
+//    axios.get(`http://127.0.0.1:3030/api/getTimetable`,{ params: {groupName: groups} })
+//      .then(res => {
+//          return res
+//      })
+//      .catch(err => {
+//        return err
+//      })
+//  }
 class SearchGroup extends Component{
+
 
 
   constructor(props){
@@ -32,34 +43,36 @@ weekClick(){
   return(document.getElementById('weekN').textContent)
 }
 
-  GroupSchedule(){
-    let time = []
-     let dis = []
- //    let day = this.fweek.map((user) => {
- //     return <div>{user}</div>;
- // });
-return (
+GroupSchedule = () =>{
+  let time = []
+   let dis = []
+    let day = this.fweek.map((user) => {
+     return <div>{user}</div>;
+ });
+  return (
   <div className="items">
-    <div className="head_table">
-      <h4 id="Name_day">12</h4>
+  <div className="head_table">
+    <h4 id="Name_day">12</h4>
+  </div>
+  <div className="body_table">
+    <div className="left_col">
+      <h5>Время</h5>
+      <div className="time">
+        <div>12</div>
+      </div>
     </div>
-    <div className="body_table">
-      <div className="left_col">
-        <h5>Время</h5>
-        <div className="time">
-          <div>12</div>
-        </div>
-      </div>
-      <div className="right_col">
-        <h5>Дисциплина</h5>
-          <div>12</div>
-          <div className="Teacher">Черкасова</div>
-          <div className="Rooms">корп ГЛ 412</div>
-      </div>
+    <div className="right_col">
+      <h5>Дисциплина</h5>
+        <div>12</div>
+        <div className="Teacher">Черкасова</div>
+        <div className="Rooms">корп ГЛ 412</div>
     </div>
   </div>
-)
-}
+  </div>
+)}
+
+
+
   NumberWeek(){
     let date = new Date()
     let week1 = new Date(date.getFullYear(), 0 , 4)
@@ -84,13 +97,13 @@ return (
    </div>
   )
 
-  Tab = () => (
+ Tab = this.props.groupNumber ? (
     <div>
       <div className="Top">
         <div className="HGroup">
-          <h2></h2>
+          <h2>{this.props.groupNumber.group}</h2>
           <h2>2 семестр 2018-2019г.</h2>
-          <h3 id="date">{this.state.date} - {this.NumberWeek()-1} неделя</h3>
+          {/*<h3 id="date">{this.Dat.date} - {this.NumberWeek()-1} неделя</h3>*/}
         </div>
         <div className="tabl">
           <div className="Timetable">
@@ -105,28 +118,31 @@ return (
             </div>
           </div>
           <div className="tablic">
-                {this.GroupSchedule()}
           </div>
         </div>
       </div>
     </div>
+  ) :
+  (
+    <div className="Top">
+      <h1>Not found</h1>
+    </div>
   )
 
   render() {
-
     let today = new Date(),
       date = today.getDate() + '.' + (today.getMonth() + 1) + '.' + today.getFullYear();
-      this.state = {
+      this.Dat = {
         date: date
       };
-      console.log(this.props.users)
+      console.log(this.props.groupNumber)
     return(
   <Router>
     <div className="container">
       <div className="nav">
         <div className="Up">
           <div className="logo_nav">
-              <Link to="/Timetable"><img src="../favicon.png" /></Link>
+              <Link onClick={this.goBack}><img src="../favicon.png" /></Link>
           </div>
           <div className="nav_menu">
             <ul>
@@ -143,19 +159,19 @@ return (
       <Route exact path="/Calendar" component={this.Calendar}/>
       <Route exact path="/Manager" component={this.Manager}/>
       <Route exact path="/Request" component={this.Request}/>
-              {this.Tab()}
+      {this.Tab}
     </div>
   </Router>
     );
   }
 }
-const mapDispatchToProps = dispatch => ({
 
-})
-function mapStateToProps(state){
+const mapStateToProps = (state, ownProps) => {
+  let groupName = ownProps.match.params.group
+  groups =   state.Timetable
+  // timetable = getTimeTableReq()
   return{
-    users: state.users
-
+    groupNumber: state.Timetable
   };
 }
-export default connect(mapStateToProps, mapDispatchToProps)(SearchGroup);
+export default connect(mapStateToProps, null)(SearchGroup);

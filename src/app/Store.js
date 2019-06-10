@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import UserRed from '../reducer/reducer';
+import UserRed from '../reducer/rootReducer';
 
 
 

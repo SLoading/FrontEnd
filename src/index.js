@@ -7,7 +7,7 @@ import RegForm from './app/RegForm';
 import Timetable from './app/Schedule';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import allReducers from './reducer/reducer';
+import allReducers from './reducer/rootReducer';
 import SearchGroup from './app/SearchGroup'
 
 import * as serviceWorker from './app/serviceWorker';
@@ -18,7 +18,7 @@ ReactDOM.render(
     <Router history={history} >
       <Route exact path="/" component={RegForm} />
       <Route exact path="/Timetable" component={Timetable} />
-      <Route path="/Timetable/group" component={SearchGroup} />
+      <Route exact path="/Timetable/group" component={SearchGroup} />
     </Router>
   </Provider>, document.getElementById('root'));
 
