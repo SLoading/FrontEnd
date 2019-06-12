@@ -2,6 +2,7 @@ const express = require('express');
 const schedule = express.Router();
 const getSchedule = require('../database/getSchedule');
 const timetable = {};
+const days = ['monday','tuesday','wednesday','thursday','friday','saturday'];
 
 
 function addSchedule(day,secondLesson){
@@ -36,58 +37,68 @@ function addSchedule(day,secondLesson){
 function parsResult(day,timetable,secondLesson){
     let dayofweek;
     let lesson;
+    let indexDay;
     if(day.weekday == "Понедельник"){
-        if (timetable.monday === undefined){
-            timetable.monday = {};
-        }
         dayofweek = "monday";
-        lesson = "L" + (Object.keys(timetable.monday).length + 1);
-        timetable.monday[lesson] = {};
+        if (timetable[dayofweek] === undefined){
+            timetable[dayofweek] = {};
+            timetable[dayofweek]['indexDay'] = days.indexOf(dayofweek);
+        }
+        lesson = "L" + (Object.keys(timetable[dayofweek]).length);
+        timetable[dayofweek][lesson] = {};
     }
     else if(day.weekday == "Вторник"){
-        if (timetable.tuesday === undefined){
-            timetable.tuesday = {};
-        }
-        lesson = "L" + (Object.keys(timetable.tuesday).length + 1);
-        timetable.tuesday[lesson] = {};
         dayofweek = "tuesday";
+        if (timetable[dayofweek] === undefined){
+            timetable[dayofweek] = {};
+            timetable[dayofweek]['indexDay'] = days.indexOf(dayofweek);
+        }
+        lesson = "L" + (Object.keys(timetable[dayofweek]).length);
+        timetable[dayofweek][lesson] = {};
 
 
     }
     else if(day.weekday == "Среда"){
-        if (timetable.wednesday === undefined){
-            timetable.wednesday = {};
-        }
-        lesson = "L" + (Object.keys(timetable.wednesday).length + 1);
-        timetable.wednesday[lesson] = {};
         dayofweek = "wednesday";
+        if (timetable[dayofweek] === undefined){
+            timetable[dayofweek] = {};
+            timetable[dayofweek]['indexDay'] = days.indexOf(dayofweek);
+        }
+        lesson = "L" + (Object.keys(timetable[dayofweek]).length);
+        timetable[dayofweek][lesson] = {};
+
     }
     else if(day.weekday == "Четверг"){
-        if (timetable.thursday === undefined){
-            timetable.thursday = {};
-        }
-        lesson = "L" + (Object.keys(timetable.thursday).length + 1);
-        timetable.thursday[lesson] = {};
         dayofweek = "thursday";
+        if (timetable[dayofweek] === undefined){
+            timetable[dayofweek]= {};
+            timetable[dayofweek]['indexDay'] = days.indexOf(dayofweek);
+        }
+        lesson = "L" + (Object.keys(timetable[dayofweek]).length);
+        timetable[dayofweek][lesson] = {};
+
     }
     else if(day.weekday == "Пятница"){
-        if (timetable.friday === undefined){
-            timetable.friday = {};
-        }
-        lesson = "L" + (Object.keys(timetable.friday).length + 1);
-        timetable.friday[lesson] = {};
         dayofweek = "friday";
+        if (timetable[dayofweek] === undefined){
+            timetable[dayofweek] = {};
+            timetable[dayofweek]['indexDay'] = days.indexOf(dayofweek);
+        }
+        lesson = "L" + (Object.keys(timetable[dayofweek]).length);
+        timetable[dayofweek][lesson] = {};
+
     }
     else{
-        if (timetable.saturday === undefined){
-            timetable.saturday = {};
-        }
-        lesson = "L" + (Object.keys(timetable.saturday).length + 1);
-        timetable.saturday[lesson] = {};
         dayofweek = "saturday";
+        if (timetable[dayofweek] === undefined){
+            timetable[dayofweek] = {};
+            timetable[dayofweek]['indexDay'] = days.indexOf(dayofweek);
+        }
+        lesson = "L" + (Object.keys(timetable[dayofweek]).length);
+        timetable[dayofweek][lesson] = {};
+
     }
     timetable[dayofweek][lesson] = addSchedule(day,secondLesson);
-
 }
 
 
@@ -129,7 +140,7 @@ schedule.get("/api/getTimetable",(req,res)=>{
         }
         res.send(timetable);
     }).catch(err=>{
-        res.status(500).send('500:Internal Server Error');
+        res.status(400).send('500:Bad request');
     });
 });
 

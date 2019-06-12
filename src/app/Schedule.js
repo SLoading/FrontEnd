@@ -13,9 +13,6 @@ let n = -1;
 let t = -1;
 let InputSearch = " "
 
-
-
-
 class Schedule extends Component{
   constructor(props) {
       super(props);
