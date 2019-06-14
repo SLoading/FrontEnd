@@ -8,6 +8,7 @@ import axios  from 'axios';
 
 
 const rootReducer = (state = initialState, action) => {
+  console.log(action.group)
     if (action.type === 'ADD_POST'){
       return{
         ...state,

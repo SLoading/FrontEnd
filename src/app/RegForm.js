@@ -29,7 +29,7 @@ constructor(props) {
     console.log()
     axios.post(`http://127.0.0.1:3030/api/login`, { user })
     .then(result =>{
-      this.props.history.push('/Timetable')
+      this.props.history.push('/Timetable/Search')
     }
   )
   .catch(err=>{

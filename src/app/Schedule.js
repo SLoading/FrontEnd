@@ -1,5 +1,5 @@
 import React, { Component,View } from 'react'
-import {BrowserRouter as Router, WithRouter, Route, Link, Redirect,Switch} from 'react-router-dom'
+import {BrowserRouter as Router, WithRouter,NavLink, Route, Link, Redirect,Switch} from 'react-router-dom'
 //import SearchGroup from './SearchGroup'
 import '../style/main.css'
 import '../style/table.css'
@@ -16,6 +16,8 @@ let InputSearch = " "
 class Schedule extends Component{
   constructor(props) {
       super(props);
+      this.state = {
+        InputSearch: ''}
   }
 
   onSearchChange(event){
@@ -26,7 +28,9 @@ class Schedule extends Component{
 
 handleCLick = () => {
   this.props.addPost(this.props.InputSearch)
-  this.props.history.push('/Timetable/group')
+  this.props.location.push(`/Timetable/group/${this.state.InputSearch}`,
+    {..."InputSearch"}
+  )
 }
 
 
@@ -47,7 +51,7 @@ Timetable = () =>(
           <div className="nav">
             <div className="Up">
               <div className="logo_nav">
-                  <Link to="/Timetable"><img src="./favicon.png" /></Link>
+                  <Link to="/Timetable"><img src="../favicon.png" /></Link>
               </div>
               <div className="nav_menu">
                 <ul>
@@ -59,8 +63,7 @@ Timetable = () =>(
               </div>
             </div>
           </div>
-          <Route exact  path="/Timetable" component={this.Timetable}/>
-          <Route exact path="/Timetable/group" component={Search}/>
+          <Route  path="/Timetable/Search" component={this.Timetable}/>
         </Router>
       </div>
     );
@@ -69,7 +72,7 @@ Timetable = () =>(
 
 const mapDispatchToProps = (dispatch) => {
   return{
-    addPost: (group) => { dispatch({type: 'ADD_POST',group:InputSearch}) }
+    addPost: (group) => { dispatch({type: 'ADD_POST',group:this.state.InputSearch}) }
   }
 }
 
