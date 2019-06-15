@@ -1,5 +1,5 @@
 import React,{ Component } from 'react';
-import {BrowserRouter as Router, WithRouter, Route, Link, Redirect,Switch} from 'react-router-dom'
+// import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
 import axios  from 'axios';
 import Timetable from './Schedule';
 class RegForm extends Component {

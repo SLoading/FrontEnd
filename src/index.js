@@ -1,7 +1,7 @@
 import React from 'react';
 
 import ReactDOM from 'react-dom';
-import {BrowserRouter as Switch, Router, Route} from 'react-router-dom'
+import {BrowserRouter as Router, Route} from 'react-router-dom'
 import createBrowserHistory from 'history/createBrowserHistory';
 import './style/main.css';
 import RegForm from './app/RegForm';
@@ -19,8 +19,8 @@ ReactDOM.render(
   <Provider store = {store}>
     <Router history={history} >
       <Route exact path="/" component={RegForm} />
-      <Route path="/Timetable" component={Timetable} />
-      <Route path="/Timetable/group/:Name" component={SearchGroup} />
+      <Route  path="/Timetable/Search" component={Timetable} />
+      <Route path="/Timetable/group/:num" component={SearchGroup} />
     </Router>
   </Provider>, document.getElementById('root'));
 

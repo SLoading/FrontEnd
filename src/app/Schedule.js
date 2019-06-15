@@ -24,22 +24,32 @@ class Schedule extends Component{
     InputSearch = document.getElementById("search_Form").value;
 
   }
-
+  NumberWeek(){
+    let numb = 0
+    var d0 = new Date ().getTime (),
+    d  = new Date (new Date ().getFullYear (), 0, 1),
+    d1 = d.getTime (),
+    dd = d.getDay (),
+    re = Math.floor ((d0 - d1) / 8.64e7) + (dd ? dd - 1 : 6);
+    if ((Math.floor (re / 7) % 2) == 1)
+      numb = 2
+    else
+      numb = 1
+      return numb
+    }
 
 handleCLick = () => {
   this.props.addPost(this.props.InputSearch)
-  this.props.location.push(`/Timetable/group/${this.state.InputSearch}`,
-    {..."InputSearch"}
-  )
+ this.props.history.push(`/Timetable/group/${InputSearch}`)
 }
 
 
 Timetable = () =>(
     <div className="Search">
       <h2>РАСПИСАНИЕ</h2>
-      <form onSubmit={this.Search}>
+      <form onSubmit={this.handleCLick}>
         <input id="search_Form" type="text"  onChange={this.onSearchChange} placeholder="Поиск..."  />
-        <input className="search_Submit"  type="submit" value='Поиск ' onClick={this.handleCLick}/>
+        <input className="search_Submit"  type="submit" value='Поиск '/>
       </form>
     </div>
 )
@@ -51,11 +61,11 @@ Timetable = () =>(
           <div className="nav">
             <div className="Up">
               <div className="logo_nav">
-                  <Link to="/Timetable"><img src="../favicon.png" /></Link>
+                  <Link to="/Timetable/Search"><img src="../favicon.png" /></Link>
               </div>
               <div className="nav_menu">
                 <ul>
-                  <li><Link to="/Timetable">Расписание</Link></li>
+                  <li><Link to="/Timetable/Search">Расписание</Link></li>
                   <li>Календарь</li>
                   <li>Менеджер кабинетов</li>
                   <li>Запросы</li>
@@ -72,7 +82,7 @@ Timetable = () =>(
 
 const mapDispatchToProps = (dispatch) => {
   return{
-    addPost: (group) => { dispatch({type: 'ADD_POST',group:this.state.InputSearch}) }
+    addPost: (group) => { dispatch( {type: 'ADD_POST', group:InputSearch} ) }
   }
 }
 
