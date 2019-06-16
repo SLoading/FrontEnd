@@ -272,7 +272,7 @@ Nnull(){
                  <h5>Время</h5>
                {week1.time[n].map((tim) =>
                  <div className="time">
-                 {tim != abv ? <div>{tim}</div> :<div>{2}</div>}
+                 {tim != abv ? <div>{tim}</div> :<div >{2}</div>}
                  </div>)}
                </div>
                <div className="right_col">
@@ -314,11 +314,16 @@ Nnull(){
         z = 0
         a = 0
         s = 0
+        prevTime = null
        while (z != weekDay[2].length){
          s = result[2][a][6]
          for(let j=a;j<result[2].length;j++){
              if (result[2][j][6] == s){
-               week2.time[z].push(result[2][j][4] + ' - ' + result[2][j][5])
+               if (result[2][j][4] == prevTime)
+                 week2.time[z].push('')
+               else{
+                 prevTime = result[2][j][4]
+                 week2.time[z].push(result[2][j][4]+' - '+result[2][j][5])}
                week2.discp[z].push(result[2][j][0])
                week2.teacher[z].push(result[2][j][2])
                if (result[2][j][3] == "null"){
@@ -337,6 +342,7 @@ Nnull(){
          week2.day.push(ddays[weekDay[2][j]])
        }
          n = 0
+         abv = null
        v2 =
        ( week2.day.map((day)=>
              <div className="tablic">
@@ -349,7 +355,7 @@ Nnull(){
                      <h5>Время</h5>
                    {week2.time[n].map((tim) =>
                      <div className="time">
-                       <div>{tim}</div>
+                       {tim != '' ? <div>{tim}</div> : <div className="timeSubgroup">{tim}</div>}
                      </div>)}
                    </div>
                    <div className="right_col">

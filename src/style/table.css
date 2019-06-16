@@ -49,7 +49,10 @@
       border: 1px solid #8e8e8e;
       border-left: 0px;
       border-top: 0px;
-      padding: 2.5em; }
+      height: 65px;
+      padding: 4vh 2em; }
+    .tablic .body_table .timeSubgroup {
+      background-color: #eee; }
     .tablic .body_table .right_col {
       text-align: left;
       width: 70%; }
@@ -60,6 +63,7 @@
       border-top: 0px;
       border-right: 0px;
       border-left: 0px;
-      padding: 1.38em; }
+      height: 65px;
+      padding: 4vh 1em; }
 
 /*# sourceMappingURL=table.css.map */
