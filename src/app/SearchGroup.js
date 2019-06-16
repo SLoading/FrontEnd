@@ -144,6 +144,10 @@ Nnull(){
 }
 
   rasp(){
+  v1 = ''
+  v2 = ''
+  result = []
+  weekDay = []
   let tt = {'fweek':this.state.timetable.fweek,
             'sweek':this.state.timetable.sweek}
   let  res_obj = [];
@@ -163,21 +167,25 @@ Nnull(){
         weekd = tt[key][week].indexDay
           weekDay[indexWeek].push(tt[key][week].indexDay)
         Object.keys(tt[key][week]).forEach(function(day){
+          console.log(tt[key][week])
+          let flag = 0
           Object.keys(tt[key][week][day]).forEach(function(lesson){
-            if (tt[key][week][day][lesson].length == undefined){
+            if (tt[key][week][day][lesson].length == undefined && flag == 0){
               let k = 0
               for (let i in tt[key][week][day]){
-                console.log(tt[key][week][day])
+                  console.log(tt[key][week][day] + '\n' + i)
                 Object.keys(tt[key][week][day][i]).forEach(function(les){
 
                   if (k < 5){
                     res_obj.push(tt[key][week][day][i][les]);
+
                   }
                   else if (k == 5){
                     res_obj.push(tt[key][week][day][i][les]);
                     res_obj.push(weekd)
                     result[indexWeek].push(res_obj)
                     res_obj = []
+
                   }
                   else if (k > 5){
                     res_obj.push(tt[key][week][day][i][les]);
@@ -188,9 +196,11 @@ Nnull(){
               res_obj.push(weekd)
               result[indexWeek].push(res_obj)
               res_obj = []
+              flag = 1
             }
-            else{
+            else if(tt[key][week][day][lesson].length != undefined){
               res_obj.push(tt[key][week][day][lesson])
+              console.log(res_obj)
             }
           })
           if (res_obj.length != 0){
@@ -201,6 +211,7 @@ Nnull(){
         })
       })
     })
+    console.log(result)
     const ddays = ['Понедельник','Вторник','Среда','Четрвег','Пятница','Суббота'];
 
         let week1 = {
@@ -227,7 +238,10 @@ Nnull(){
                 week1.time[z].push(result[1][j][4]+' - '+result[1][j][5])
                 week1.discp[z].push(result[1][j][0])
                 week1.teacher[z].push(result[1][j][2])
-                week1.kab[z].push(result[1][j][1])
+                if (result[1][j][3] == "null"){
+                  week1.kab[z].push(result[1][j][1])}
+                else{
+                  week1.kab[z].push(result[1][j][1]+ ' ' + '('+ result[1][j][3]+')')}
                 a++
               }
               else
@@ -239,7 +253,7 @@ Nnull(){
         for (let j in weekDay[1]){
           week1.day.push(ddays[weekDay[1][j]])
         }
-n=0
+        n = 0
     v1 =
     ( week1.day.map((day)=>
          <div className="tablic">
@@ -291,17 +305,20 @@ n=0
            week2.teacher.push([])
            week2.kab.push([])
        }
-       z = 0
+        z = 0
         a = 0
         s = 0
        while (z != weekDay[2].length){
          s = result[2][a][6]
          for(let j=a;j<result[2].length;j++){
              if (result[2][j][6] == s){
-               week2.time[z].push(result[2][j][4]+' - '+result[2][j][5])
+               week2.time[z].push(result[2][j][4] + ' - ' + result[2][j][5])
                week2.discp[z].push(result[2][j][0])
                week2.teacher[z].push(result[2][j][2])
-               week2.kab[z].push(result[2][j][1])
+               if (result[2][j][3] == "null"){
+                 week2.kab[z].push(result[2][j][1])}
+               else{
+                 week2.kab[z].push(result[2][j][1]+ ' ' + '('+ result[2][j][3]+')')}
                a++
              }
              else
@@ -313,7 +330,7 @@ n=0
        for (let j in weekDay[2]){
          week2.day.push(ddays[weekDay[2][j]])
        }
-        n=0
+         n = 0
        v2 =
        ( week2.day.map((day)=>
              <div className="tablic">
