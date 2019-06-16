@@ -231,11 +231,16 @@ Nnull(){
         let z = 0
         let a = 0
         let s = 0
+        let prevTime = null
         while (z != weekDay[1].length){
           s = result[1][a][6]
           for(let j=a;j<result[1].length;j++){
               if (result[1][j][6] == s){
-                week1.time[z].push(result[1][j][4]+' - '+result[1][j][5])
+                if (result[1][j][4] == prevTime)
+                  week1.time[z].push('')
+                else{
+                  prevTime = result[1][j][4]
+                  week1.time[z].push(result[1][j][4]+' - '+result[1][j][5])}
                 week1.discp[z].push(result[1][j][0])
                 week1.teacher[z].push(result[1][j][2])
                 if (result[1][j][3] == "null"){
@@ -249,11 +254,12 @@ Nnull(){
           }
           z++
         }
-
+        console.log(week1)
         for (let j in weekDay[1]){
           week1.day.push(ddays[weekDay[1][j]])
         }
         n = 0
+        let abv = null
     v1 =
     ( week1.day.map((day)=>
          <div className="tablic">
@@ -266,7 +272,7 @@ Nnull(){
                  <h5>Время</h5>
                {week1.time[n].map((tim) =>
                  <div className="time">
-                   <div>{tim}</div>
+                 {tim != abv ? <div>{tim}</div> :<div>{2}</div>}
                  </div>)}
                </div>
                <div className="right_col">
