@@ -41,7 +41,7 @@
   .head_table{
     background-color: #006cb5;
     color:#fff;
-    padding: 3px 25vw;
+    padding: 3px 25vmin;
     h4{
       margin: 12px;
     }
@@ -54,7 +54,7 @@
     h5{
       margin-bottom: 0px;
       padding-bottom: 7px;
-      border-bottom: 2px solid #000;
+      border-bottom: 1.35px solid #000;
     }
     .left_col{
       width:30%;
@@ -62,13 +62,18 @@
     .time{
       border: 1px solid #8e8e8e;
       border-left: 0px;
-      border-top: 0px;
+      border-bottom: 0px;
                 height: 65px;
-      padding: 4vh 2em;
+      padding: 7vh 2em 1vh 2em;
     }
-    .timeSubgroup{
-      background-color: #eee;
 
+    .timeSubgroup{
+      border-right: 1px solid #8e8e8e;
+      border-bottom: 0px;
+      border-left: 0px;
+      border-top: 1px solid #fff;
+                height: 65px;
+      padding: 8vh 2em 0vh 2em;
     }
     .right_col{
       text-align: left;
@@ -79,7 +84,7 @@
     }
     .discip{
       border: 1px solid #8e8e8e;
-      border-top: 0px;
+      border-bottom: 0px;
       border-right: 0px;
       border-left: 0px;
             height: 65px;

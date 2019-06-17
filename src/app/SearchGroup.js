@@ -271,8 +271,8 @@ Nnull(){
                <div className="left_col">
                  <h5>Время</h5>
                {week1.time[n].map((tim) =>
-                 <div className="time">
-                 {tim != abv ? <div>{tim}</div> :<div >{2}</div>}
+                 <div>
+                 {tim != '' ? <div className="time"><div>{tim}</div></div> : <div className="timeSubgroup"><div >{tim}</div></div>}
                  </div>)}
                </div>
                <div className="right_col">
@@ -354,8 +354,8 @@ Nnull(){
                    <div className="left_col">
                      <h5>Время</h5>
                    {week2.time[n].map((tim) =>
-                     <div className="time">
-                       {tim != '' ? <div>{tim}</div> : <div className="timeSubgroup">{tim}</div>}
+                     <div>
+                     {tim != '' ? <div className="time"><div>{tim}</div></div> : <div className="timeSubgroup"><div >{tim}</div></div>}
                      </div>)}
                    </div>
                    <div className="right_col">
@@ -434,7 +434,7 @@ Nnull(){
             <div className="nav">
               <div className="Up">
                 <div className="logo_nav">
-                    <Link onClick={this.goBack}><img src="../favicon.png" /></Link>
+                    <Link onClick={this.goBack}><img src="/favicon.png" /></Link>
                 </div>
                 <div className="nav_menu">
                   <ul>

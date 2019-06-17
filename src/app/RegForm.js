@@ -30,11 +30,13 @@ constructor(props) {
     axios.post(`http://127.0.0.1:3030/api/login`, { user })
     .then(result =>{
       this.props.history.push('/Timetable/Search')
-    }
-  )
-  .catch(err=>{
-    console.log(err);
-  })
+      }
+    )
+    .catch(err=>{
+      alert('Неверно введен логин или пароль');
+      console.log(err);
+      }
+    )
   }
   render() {
     return (
@@ -51,9 +53,9 @@ constructor(props) {
                 <b>Password:</b>
                 <input type="password" name="password" value={this.state.pass} onChange={this.onPasswChange}/>
               </label>
-              <br/>
-                <a href='#' className="dKnow_pass">Forgot password?</a>
-              <br/>
+            {/*  <br/>
+            <a href='#' className="dKnow_pass">Forgot password?</a>
+              <br/>*/}
             <input className="btnAut" type="submit" value="Log in" onClick={this.Schedule}/>
             </form>
           </header>
