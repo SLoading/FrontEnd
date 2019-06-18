@@ -15,6 +15,7 @@ const store = new  Store();
 let n = 0
 let t = 0
 let v1
+let vs
 let v2
 let ur
 
@@ -53,6 +54,7 @@ test (){
     return new Promise((resolve,reject)=>{
       axios.get(`http://127.0.0.1:3030/api/getTimetable`,{ params: {groupName:this.props.match.params.num } })
         .then(res => {
+          console.log(res.data)
            resolve(res.data)
         })
         .catch(err => {
@@ -112,6 +114,29 @@ dayYears(){
         date: date
       })
   }
+  raspClick(){
+    if (this.state.dayN == 1){
+      this.setState(
+        {
+          tabl: v2
+        }
+      )
+    }
+    else{
+      this.setState(
+        {
+          tabl: v1
+        }
+      )
+  }
+  }
+  sessClick(){
+    this.setState(
+      {
+        tabl:vs
+      }
+    )
+  }
 weekClick(){
   if (this.state.dayN == 1){
     this.setState(
@@ -129,7 +154,9 @@ weekClick(){
       }
     )
 }}
-
+ClickGoSearch(){
+  this.props.history.push('/Timetable/Search')
+}
 SsumT(){
   t++
 }
@@ -148,8 +175,11 @@ Nnull(){
   v2 = ''
   result = []
   weekDay = []
+  let sess = []
   let tt = {'fweek':this.state.timetable.fweek,
-            'sweek':this.state.timetable.sweek}
+            'sweek':this.state.timetable.sweek,
+            }
+  console.log(this.state.timetable.session)
   let  res_obj = [];
   let group = this.state.timetable.group
   result.push(group);
@@ -163,17 +193,19 @@ Nnull(){
   weekDay.push([])
     Object.keys(tt).forEach(function(key){
       indexWeek++
+
+      console.log(sess)
       Object.keys(tt[key]).forEach(function(week){
         weekd = tt[key][week].indexDay
           weekDay[indexWeek].push(tt[key][week].indexDay)
         Object.keys(tt[key][week]).forEach(function(day){
-          console.log(tt[key][week])
           let flag = 0
           Object.keys(tt[key][week][day]).forEach(function(lesson){
             if (tt[key][week][day][lesson].length == undefined && flag == 0){
               let k = 0
+
               for (let i in tt[key][week][day]){
-                  console.log(tt[key][week][day] + '\n' + i)
+
                 Object.keys(tt[key][week][day][i]).forEach(function(les){
 
                   if (k < 5){
@@ -200,7 +232,7 @@ Nnull(){
             }
             else if(tt[key][week][day][lesson].length != undefined){
               res_obj.push(tt[key][week][day][lesson])
-              console.log(res_obj)
+
             }
           })
           if (res_obj.length != 0){
@@ -212,7 +244,101 @@ Nnull(){
       })
     })
     console.log(result)
+    let  res_ekz = [];
+    let st = {'session':this.state.timetable.session
+              }
+    Object.keys(st).forEach(function(key){
+        Object.keys(st[key]).forEach(function(l){
+          Object.keys(st[key][l]).forEach(function(le){
+              sess.push(st[key][l][le])
+          })
+        })
+      })
+      let o = 0
+      let sss = []
+      sss.push([])
+        let q = 0
+      for( let i in sess){
+        console.log(sess[i])
+        if (o ==7){
+          o = 0;
+          sss.push([])
+          q++
+          sss[q].push([sess[i]])
+        }
+        else
+          sss[q].push([sess[i]])
+        o++
+      }
+      console.log(sss)
     const ddays = ['Понедельник','Вторник','Среда','Четрвег','Пятница','Суббота'];
+      let ses = {
+        date:[],
+        time:[],
+        disp:[],
+        teacher:[],
+        kab:[]
+      }
+      console.log(sss.length)
+      for(let j=0;j<sss.length;j++){
+          ses.time.push([])
+          ses.disp.push([])
+          ses.teacher.push([])
+          ses.kab.push([])
+      }
+      let z = 0
+      let a = 0
+      let s = 0
+      let prevTime = null
+        for(let j=0;j<sss.length;j++){
+              ses.time[j].push(sss[j][4][0])
+              ses.disp[j].push(sss[j][0][0])
+              ses.teacher[j].push(sss[j][3][0])
+              ses.kab[j].push(sss[j][1][0])
+              ses.date.push(sss[j][6][0])
+              }
+
+              n = 0
+              let abv = null
+              console.log(ses)
+          vs =
+          ( ses.date.map((dat)=>
+               <div className="tablic">
+                 <div className="items">
+                   <div className="head_table">
+                     <h4 id="Name_day">{dat}</h4>
+                   </div>
+                   <div className="body_table">
+                     <div className="left_col">
+                       <h5>Время</h5>
+                     {ses.time[n].map((tim) =>
+                       <div className="time">
+                        <div>{tim}</div>
+                       </div>
+                       )}
+                     </div>
+                     <div className="right_col">
+                       <h5>Дисциплина</h5>
+                       {ses.disp[n].map((dis) =>
+                       <div className="discip">
+                           <div>
+                             <div>{dis}</div>
+                           </div>
+                           <div className="Teacher">
+                             <div>{ses.teacher[n][t]}</div>
+                           </div>
+                           <div className="Rooms">
+                             <div>{ses.kab[n][t]}</div>
+                           </div>
+                           {this.SsumT()}
+                       </div>)}
+                     </div>
+                   </div>
+                 </div>
+                 {this.Snull()}
+                 {this.Nsum()}
+               </div>)
+             )
 
         let week1 = {
             day:[],
@@ -228,10 +354,10 @@ Nnull(){
             week1.teacher.push([])
             week1.kab.push([])
         }
-        let z = 0
-        let a = 0
-        let s = 0
-        let prevTime = null
+         z = 0
+         a = 0
+         s = 0
+         prevTime = null
         while (z != weekDay[1].length){
           s = result[1][a][6]
           for(let j=a;j<result[1].length;j++){
@@ -254,16 +380,16 @@ Nnull(){
           }
           z++
         }
-        console.log(week1)
+
         for (let j in weekDay[1]){
           week1.day.push(ddays[weekDay[1][j]])
         }
+
         n = 0
-        let abv = null
+        abv = null
     v1 =
     ( week1.day.map((day)=>
          <div className="tablic">
-           <div className="items">
              <div className="head_table">
                <h4 id="Name_day">{day}</h4>
              </div>
@@ -290,7 +416,6 @@ Nnull(){
                      </div>
                      {this.SsumT()}
                  </div>)}
-               </div>
              </div>
            </div>
            {this.Snull()}
@@ -346,7 +471,6 @@ Nnull(){
        v2 =
        ( week2.day.map((day)=>
              <div className="tablic">
-               <div className="items">
                  <div className="head_table">
                    <h4 id="Name_day">{day}</h4>
                  </div>
@@ -355,7 +479,7 @@ Nnull(){
                      <h5>Время</h5>
                    {week2.time[n].map((tim) =>
                      <div>
-                     {tim != '' ? <div className="time"><div>{tim}</div></div> : <div className="timeSubgroup"><div >{tim}</div></div>}
+                     {tim != '' ? <div className="time"><div>{tim}</div></div> : <div className="timeSubgroup"><div ></div></div>}
                      </div>)}
                    </div>
                    <div className="right_col">
@@ -373,7 +497,6 @@ Nnull(){
                          </div>
                          {this.SsumT()}
                      </div>)}
-                   </div>
                  </div>
                </div>
                {this.Snull()}
@@ -403,9 +526,11 @@ Nnull(){
       </div>
       <div className="tabl">
         <div className="Timetable">
-          <Link to={`/Timetable/group/${this.props.match.params.num}`} className="TimetableClasses">Расписание занятий</Link>
-          <a className="TimetableSession">Расписание сессии</a>
+          <Link to={`/Timetable/group/${this.props.match.params.num}`} onClick={(e) => this.raspClick(e)} className="TimetableClasses">Расписание занятий</Link>
+          <Link to={`/Timetable/group/${this.props.match.params.num}/session`} onClick={(e) => this.sessClick(e)} className="TimetableSession">Расписание сессии</Link>
         </div>
+        {this.state.tabl !=vs ?
+          <div>
         <div className="week">
           <div className="arrow_week">
             <button onClick={(e) => this.weekClick(e)}>&lt;</button>
@@ -413,7 +538,7 @@ Nnull(){
             <button href='#' onClick={(e) => this.weekClick(e)}>&gt;</button>
           </div>
         </div>
-        {this.state.tabl}
+        {this.state.tabl}</div> : <div className="otstup">{this.state.tabl}</div>}
       </div>
     </div>
   </Router>)
@@ -434,11 +559,11 @@ Nnull(){
             <div className="nav">
               <div className="Up">
                 <div className="logo_nav">
-                    <Link onClick={this.goBack}><img src="/favicon.png" /></Link>
+                    <a href="/Timetable/Search"><img src="/favicon.png" /></a>
                 </div>
                 <div className="nav_menu">
                   <ul>
-                    <li><Link onClick={this.goBack}>Расписание</Link></li>
+                    <li><a href="/Timetable/Search">Расписание</a></li>
                     <li>Календарь</li>
                     <li>Менеджер кабинетов</li>
                     <li>Запросы</li>
@@ -446,7 +571,7 @@ Nnull(){
                 </div>
               </div>
             </div>
-            <Route  path={`/Timetable/group/${this.props.match.params.num}`} children={this.Tab}/>
+            <Route path={`/Timetable/group/${this.props.match.params.num}`} children={this.Tab}/>
           </div>
         </Router>
     );

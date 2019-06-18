@@ -25,6 +25,9 @@
     background-color: #006cb5;
     color: #fff; }
 
+.otstup {
+  margin-top: 20px; }
+
 .tablic {
   display: flex;
   flex-direction: column; }

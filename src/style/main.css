@@ -108,7 +108,7 @@ input {
 .tabl {
   display: flex;
   flex-direction: column;
-  margin: 0px 20vmin;
+  padding: 0px 35vmin;
   top: 35%;
   left: 50%; }
 
