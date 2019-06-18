@@ -8,20 +8,21 @@
     text-decoration: none; }
   .tabl .Timetable .TimetableClasses {
     background-color: #006cb5;
-    padding: 10px 20px;
+    padding: 10px 24vmin;
     color: #fff; }
   .tabl .Timetable .TimetableSession {
     background-color: #fff;
-    padding: 10px 20px;
+    padding: 10px 24vmin;
     color: #006cb5; }
   .tabl .Timetable .TimetableSession:hover {
     background-color: #006cb5;
     color: #fff; }
   .tabl .Timetable .TimetableClasses:active {
     background-color: #fff;
-    padding: 10px 20px;
+    padding: 10px 24vmin;
     color: #006cb5; }
-  .tabl .Timetable .TimetableSession:active {
+  .tabl .Timetable .TimetableSession:after {
+    padding: 10px 24vmin;
     background-color: #006cb5;
     color: #fff; }
 

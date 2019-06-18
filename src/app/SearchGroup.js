@@ -114,7 +114,14 @@ dayYears(){
         date: date
       })
   }
-  raspClick(){
+  raspClick(e){
+    e.preventDefault()
+    let raspis = document.getElementById("TC")
+    let sesss = document.getElementById("TS")
+    raspis.style.background = '#006cb5'
+    raspis.style.color = '#fff'
+    sesss.style.background = '#fff'
+    sesss.style.color = '#006cb5'
     if (this.state.dayN == 1){
       this.setState(
         {
@@ -130,7 +137,14 @@ dayYears(){
       )
   }
   }
-  sessClick(){
+  sessClick(e){
+    e.preventDefault()
+    let raspis = document.getElementById("TC")
+    let sesss = document.getElementById("TS")
+    raspis.style.background = '#fff'
+    raspis.style.color = '#006cb5'
+    sesss.style.background = '#006cb5'
+    sesss.style.color = '#fff'
     this.setState(
       {
         tabl:vs
@@ -526,8 +540,8 @@ Nnull(){
       </div>
       <div className="tabl">
         <div className="Timetable">
-          <Link to={`/Timetable/group/${this.props.match.params.num}`} onClick={(e) => this.raspClick(e)} className="TimetableClasses">Расписание занятий</Link>
-          <Link to={`/Timetable/group/${this.props.match.params.num}/session`} onClick={(e) => this.sessClick(e)} className="TimetableSession">Расписание сессии</Link>
+          <Link to={`/Timetable/group/${this.props.match.params.num}`} onClick={(e) => this.raspClick(e)} className="TimetableClasses" id="TC">Расписание занятий</Link>
+          <Link to={`/Timetable/group/${this.props.match.params.num}/session`} onClick={(e) => this.sessClick(e)} className="TimetableSession" id="TS">Расписание сессии</Link>
         </div>
         {this.state.tabl !=vs ?
           <div>

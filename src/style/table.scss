@@ -1,10 +1,13 @@
 .tabl{
-  
+
   .Timetable{
     width: 100%;
     display: flex;
     flex-direction: row;
     justify-content:space-between;
+    .Link{
+
+    }
     a{
 
       outline: none;
@@ -12,12 +15,12 @@
     }
     .TimetableClasses{
       background-color: #006cb5;
-      padding: 10px 20px;
+      padding: 10px 24vmin;
       color:#fff;
     }
     .TimetableSession{
       background-color: #fff;
-      padding: 10px 20px;
+      padding: 10px 24vmin;
       color:#006cb5;
     }
     .TimetableSession:hover{
@@ -26,10 +29,11 @@
     }
     .TimetableClasses:active{
       background-color: #fff;
-      padding: 10px 20px;
+      padding: 10px 24vmin;
       color:#006cb5;
     }
-    .TimetableSession:active{
+    .TimetableSession:after{
+      padding: 10px 24vmin;
       background-color: #006cb5;
       color:#fff;
     }
