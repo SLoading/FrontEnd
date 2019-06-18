@@ -3,6 +3,7 @@ const needle = require('needle');
 const cheerio = require('cheerio');
 year = "2018";
 semester = "2";
+urlTest = ["БПА16-01 (23-7)"];
 urlGroup = ["БПА18-01","БПА18-02","БПА17-01","БПА16-01 (23-7)","24-7",
             "БИМ18-01","БИМВ18-01","БИМ17-01","БИМ16-01 (23-6)","24-6",
             "БИН18-01","БИН17-01","БИН16-01 (23-8)","БИНВ16-01 (10092-31)","24-8",
@@ -153,6 +154,31 @@ module.exports = function requestP() {
 
                     calculate(mainElementTreeWeek1,1,groupString,containerResult,$);
                     calculate(mainElementTreeWeek2,2,groupString,containerResult,$);
+                    
+                    mainElementTreeSession = $("div.tab-content").children("div#session_tab").children("div.day");
+                    mainElementTreeSession.each(function(i,val){
+                        let date = $(val).children("div.header").children("div.name").text().trim();
+
+                        if (date.length > 10){
+                            date = date.slice(0,10);
+                        }
+                        let timeBeg = $(val).children("div.body").children("div").children("div.time").text().trim();
+                        let line = $(val).children("div.body").children("div").children("div.discipline").children("div").children("div").children("ul").children("li");
+                        let discipline = {"date":date,
+                                          "timeBeg":timeBeg,
+                                          "timeEnd":''};
+                        line.each(function(i,col){
+                            if (i === 0)
+                                discipline.classes = $(col).text().trim();
+                            else if (i === 1)
+                                discipline.teacher = $(col).text().trim();
+                            else
+                                discipline.classroom = $(col).text().trim();
+                        });
+                        discipline.group = groupString;
+                        containerResult.push(discipline);
+
+                    });
                     
 
                     const addInDB = require('../addDB/addInDB');

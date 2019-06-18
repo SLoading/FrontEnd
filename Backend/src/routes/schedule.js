@@ -1,6 +1,7 @@
 const express = require('express');
 const schedule = express.Router();
 const getSchedule = require('../database/getSchedule');
+const getSession = require('../database/getSession');
 const timetable = {};
 const days = ['monday','tuesday','wednesday','thursday','friday','saturday'];
 
@@ -55,8 +56,8 @@ function parsResult(day,timetable,secondLesson){
         }
         lesson = "L" + (Object.keys(timetable[dayofweek]).length);
         timetable[dayofweek][lesson] = {};
-
-
+        
+        
     }
     else if(day.weekday == "Среда"){
         dayofweek = "wednesday";
@@ -66,7 +67,7 @@ function parsResult(day,timetable,secondLesson){
         }
         lesson = "L" + (Object.keys(timetable[dayofweek]).length);
         timetable[dayofweek][lesson] = {};
-
+        
     }
     else if(day.weekday == "Четверг"){
         dayofweek = "thursday";
@@ -76,7 +77,7 @@ function parsResult(day,timetable,secondLesson){
         }
         lesson = "L" + (Object.keys(timetable[dayofweek]).length);
         timetable[dayofweek][lesson] = {};
-
+        
     }
     else if(day.weekday == "Пятница"){
         dayofweek = "friday";
@@ -86,7 +87,7 @@ function parsResult(day,timetable,secondLesson){
         }
         lesson = "L" + (Object.keys(timetable[dayofweek]).length);
         timetable[dayofweek][lesson] = {};
-
+        
     }
     else{
         dayofweek = "saturday";
@@ -96,7 +97,7 @@ function parsResult(day,timetable,secondLesson){
         }
         lesson = "L" + (Object.keys(timetable[dayofweek]).length);
         timetable[dayofweek][lesson] = {};
-
+        
     }
     timetable[dayofweek][lesson] = addSchedule(day,secondLesson);
 }
@@ -106,41 +107,62 @@ schedule.get("/api/getTimetable",(req,res)=>{
     let groupName = req.query.groupName;
     getSchedule(groupName)
     .then(result=>{
-        timetable.group = result[0].group;
-        timetable.fweek = {};
-        timetable.sweek = {};
-        let i = 0;
-        let index;
-        while(result.length != i){
-            let secondLesson;
-            index = i;
-            try{
-                if (result[i].parity === 1){
-                    if(result[i].weekday === result[i+1].weekday){
-                        if (result[i].begin === result[i+1].begin){
-                            secondLesson = result[i+1];
-                            i++;
+        getSession(groupName)
+        .then(session=>{
+            timetable.group = result[0].group;
+            timetable.fweek = {};
+            timetable.sweek = {};
+            let i = 0;
+            let index;
+            while(result.length != i){
+                let secondLesson;
+                index = i;
+                try{
+                    if (result[i].parity === 1){
+                        if(result[i].weekday === result[i+1].weekday){
+                            if (result[i].begin === result[i+1].begin){
+                                secondLesson = result[i+1];
+                                i++;
+                            }
                         }
+                        parsResult(result[index],timetable.fweek,secondLesson);
                     }
-                    parsResult(result[index],timetable.fweek,secondLesson);
-                }
-                else{
-                    if(result[i].weekday === result[i+1].weekday){
-                        if (result[i].begin === result[i+1].begin){
-                            secondLesson = result[i+1];
-                            i++;
+                    else{
+                        if(result[i].weekday === result[i+1].weekday){
+                            if (result[i].begin === result[i+1].begin){
+                                secondLesson = result[i+1];
+                                i++;
+                            }
                         }
+                        parsResult(result[index],timetable.sweek,secondLesson);
                     }
-                    parsResult(result[index],timetable.sweek,secondLesson);
+                }catch(err){
+                    parsResult(result[index],timetable.sweek,undefined);
                 }
-            }catch(err){
-                parsResult(result[index],timetable.sweek,undefined);
+                i++;
             }
-            i++;
-        }
-        res.send(timetable);
+            timetable.session = {};
+            i = 0;
+            while (session.length != i){
+                exam = "E" + (i+1);
+                timetable.session[exam] = {};
+                timetable.session[exam]['class'] = session[i].class;
+                timetable.session[exam]['classroom'] = session[i].classroom;
+                timetable.session[exam]['group'] = session[i].group;
+                timetable.session[exam]['teacher'] = session[i].teacher;
+                timetable.session[exam]['timeBegin'] = session[i].timeBeg;
+                timetable.session[exam]['timeEnd'] = session[i].timeEnd;
+                timetable.session[exam]['date'] = session[i].date;
+                i++;
+            }
+            res.send(timetable);
+        })
+        .catch(err=>{
+            console.log(err);
+        })
+        
     }).catch(err=>{
-        res.status(400).send('500:Bad request');
+        res.status(500).send('500:Bad request');
     });
 });
 

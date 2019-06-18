@@ -26,7 +26,7 @@ constructor(props) {
       login: this.state.log,
       password : this.state.pass
     };
-    console.log()
+
     axios.post(`http://127.0.0.1:3030/api/login`, { user })
     .then(result =>{
       this.props.history.push('/Timetable/Search')

@@ -18,7 +18,7 @@ const store = createStore(allReducers)
 ReactDOM.render(
   <Provider store = {store}>
     <Router history={history} >
-      <Route exact path="/" component={RegForm} />
+       <Route exact path="/" component={Timetable} />
       <Route  path="/Timetable/Search" component={Timetable} />
       <Route path="/Timetable/group/:num" component={SearchGroup} />
     </Router>

@@ -5,23 +5,22 @@ const User = require('../models/user');
 users.use(cors());
 
 users.post('/api/login',(req,res)=>{
-    console.log(req.body.user)
-    const authoriz = req.body.user
+    const autoriz = req.body.user;
     User.findOne({
         where:{
-            login : authoriz.login
+            login : autoriz.login
         }
     })
     .then(user=>{
-        if (user.password == authoriz.password){
-            res.send("good");
+        if (user.password == autoriz.password){
+            res.status(200).send();
         }
         else{
-            res.Redirect("/error");
+            res.status(500).send("500:Bad request");
         }
     })
     .catch(err=> {
-        res.Redirect(err);
+        res.status(500).send("500:Bad request");
     });
 });
 
