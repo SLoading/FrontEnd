@@ -125,14 +125,16 @@ dayYears(){
     if (this.state.dayN == 1){
       this.setState(
         {
-          tabl: v2
+          dayN:1,
+          tabl: v1
         }
       )
     }
     else{
       this.setState(
         {
-          tabl: v1
+          dayN:2,
+          tabl: v2
         }
       )
   }

@@ -100,3 +100,45 @@
     }
   }
 }
+@media screen and (max-width: 1309px) {
+.tabl{
+  .Timetable{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    .Link{
+
+    }
+    a{
+
+      outline: none;
+      text-decoration: none;
+    }
+    .TimetableClasses{
+      background-color: #006cb5;
+      padding: 10px 0vmin;
+      color:#fff;
+    }
+    .TimetableSession{
+      background-color: #fff;
+      padding: 10px 0vmin;
+      color:#006cb5;
+    }
+    .TimetableSession:hover{
+      background-color: #006cb5;
+      color:#fff;
+    }
+    .TimetableClasses:active{
+      background-color: #fff;
+      padding: 10px 0vmin;
+      color:#006cb5;
+    }
+    .TimetableSession:after{
+      padding: 10px 0vmin;
+      background-color: #006cb5;
+      color:#fff;
+    }
+  }
+}
+}

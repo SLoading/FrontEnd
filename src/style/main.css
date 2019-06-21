@@ -146,4 +146,12 @@ input {
   display: flex;
   flex-direction: column; }
 
+@media screen and (max-width: 900px) {
+  .tabl {
+    display: flex;
+    flex-direction: column;
+    padding: 0px 0vmin;
+    top: 35%;
+    left: 50%; } }
+
 /*# sourceMappingURL=main.css.map */
