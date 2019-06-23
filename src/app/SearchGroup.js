@@ -110,6 +110,7 @@ NumberWeek(){
 dayYears(){
     let today = new Date(),
       date = today.getDate() + '.' + (today.getMonth() + 1) + '.' + today.getFullYear();
+
       this.setState({
         date: date
       })
@@ -275,7 +276,6 @@ Nnull(){
       sss.push([])
         let q = 0
       for( let i in sess){
-        console.log(sess[i])
         if (o ==7){
           o = 0;
           sss.push([])
@@ -317,13 +317,25 @@ Nnull(){
               n = 0
               let abv = null
               console.log(ses)
+              let today = new Date(),
+                date = today.getDate() + '.0' + (today.getMonth() + 1) + '.' + today.getFullYear();
+                console.log(date)
+                        console.log(today.getDay())
+              let weekday=new Array(7);
+                weekday[0]="Воскресенье";
+                weekday[1]="Понедельник";
+                weekday[2]="Вторник";
+                weekday[3]="Среда";
+                weekday[4]="Четверг";
+                weekday[5]="Пятница";
+                weekday[6]="Суббота";
+                let dddddd = weekday[today.getDay()]
+                console.log(dddddd)
           vs =
           ( ses.date.map((dat)=>
                <div className="tablic">
                  <div className="items">
-                   <div className="head_table">
-                     <h4 id="Name_day">{dat}</h4>
-                   </div>
+                  {dat == date ? <div className="head_table"><h4 id="Name_day">{dat}</h4><div className="circleIn"></div></div> : <div className="head_table"><h4>{dat}</h4></div>}
                    <div className="body_table">
                      <div className="left_col">
                        <h5>Время</h5>
@@ -403,12 +415,12 @@ Nnull(){
 
         n = 0
         abv = null
+
+
     v1 =
     ( week1.day.map((day)=>
          <div className="tablic">
-             <div className="head_table">
-               <h4 id="Name_day">{day}</h4>
-             </div>
+            {day == dddddd && this.NumberWeek() == 1 ? <div className="head_table"><h4 id="Name_day">{day}</h4><div className="circleIn"></div></div> : <div className="head_table"><h4>{day}</h4></div>}
              <div className="body_table">
                <div className="left_col">
                  <h5>Время</h5>
@@ -487,9 +499,7 @@ Nnull(){
        v2 =
        ( week2.day.map((day)=>
              <div className="tablic">
-                 <div className="head_table">
-                   <h4 id="Name_day">{day}</h4>
-                 </div>
+                 {day == dddddd && this.NumberWeek() == 2 ? <div className="head_table"><h4 id="Name_day">{day}</h4><div className="circleIn"></div></div> : <div className="head_table"><h4>{day}</h4></div>}
                  <div className="body_table">
                    <div className="left_col">
                      <h5>Время</h5>

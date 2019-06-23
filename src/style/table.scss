@@ -50,8 +50,18 @@
     background-color: #006cb5;
     color:#fff;
     padding: 3px 25vmin;
+    display: flex;
+    flex-direction: row;
     h4{
       margin: 12px;
+      margin-left: 45%;
+    }
+    .circleIn{
+      background-color: #d73434;
+      margin-top: 16px;
+      width: 7px;
+      height: 7px;
+      border-radius: 10px;
     }
   }
   .body_table{
